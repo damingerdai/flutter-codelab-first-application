@@ -36,7 +36,17 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
-      body: Column(children: [Text('A random idea:'), Text(appState.current.asLowerCase)]),
+      body: Column(
+        children: [
+          Text('A random daming idea:'), 
+          Text(appState.current.asLowerCase),
+          ElevatedButton(
+            onPressed: () => {
+              print('button pressed!')
+            },
+            child: Text('Next'),
+          )
+        ]),
     );
   }
 
