@@ -1,0 +1,36 @@
+name: Flutter Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+    
+      - run: flutter config --enable-macos-desktop
+
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - run: flutter build macos --release
+
+      - name: Compress build for macOS
+        if: matrix.target == 'macOS'
+        run: ditto -c -k --sequesterRsrc --keepParent daming-lutter-codelab-first-application.app $GITHUB_WORKSPACE/flutter-codelab-first-application_macOS.zip
+      
+      - name: Upload Na
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/macos/Build/Products/Release/*.app
