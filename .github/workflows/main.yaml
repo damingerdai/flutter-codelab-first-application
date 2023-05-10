@@ -27,10 +27,10 @@ jobs:
 
       - name: Compress build for macOS
         if: matrix.target == 'macOS'
-        run: ditto -c -k --sequesterRsrc --keepParent daming-lutter-codelab-first-application.app $GITHUB_WORKSPACE/flutter-codelab-first-application_macOS.zip
+        run: ditto -c -k --sequesterRsrc --keepParent daming-flutter-codelab-first-application.app $GITHUB_WORKSPACE/flutter-codelab-first-application_macOS.zip
       
       - name: Upload Na
         uses: actions/upload-artifact@v3
         with:
-          name: release-apk
+          name: daming-flutter-codelab-first-application-macos
           path: build/macos/Build/Products/Release/*.app
